@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ubuntu machine Dir info
-      - run: |
+        run: |
             pwd
             ls -a
             echo $GITHUB_SHA
