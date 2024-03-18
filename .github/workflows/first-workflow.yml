@@ -2,13 +2,17 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
+  configure-the-Microsoft-KM-TEST-Loopback-Adapter:
+    runs-on: windows-latest
     steps:
-      - name: ubuntu machine Dir info
-        run: |
-            pwd
-            ls -a
-            echo $GITHUB_SHA
-            echo $GITHUB_REPOSITORY
-            echo $GITHUB_WORKSPACE
+      - name: Retrieves network adapter information matching the specified 
+        run: $adapter=Get-NetAdapter -InterfaceDescription "Microsoft KM-TEST Loopback Adapt"
+
+      - name: Renames the network adapter with the specified interface
+        run: Rename-NetAdapter -InterfaceDescription "Microsoft KM-TEST Loopback Adapter" -NewName "Loop1"
+
+      - name: Assigns a new IP address to the network adapter with the specified interface index
+        run: New-NetIPAddress -InterfaceIndex $adapter.ifIndex -AddressFamily "IPv4" -IPAddress "172.16.0.2" -PrefixLength 24
+
+      - name: Adds a static route to the routing table
+        run: Route add 172.16.0.0 mask 255.240.0.0 172.16.0.1 metric 1
